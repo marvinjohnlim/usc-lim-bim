@@ -38,5 +38,5 @@ types = set(el.is_a() for el in ifc_file)
 print("Object types in file:", types)
 
 #10
-
 ifc_file.write("AC20-FZK-Haus_renamed.ifc")
+
