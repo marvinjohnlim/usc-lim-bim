@@ -4,7 +4,7 @@ ifc_file = ifcopenshell.open("AC20-FZK-Haus.ifc")
 #3 
 print("IFC file loaded:", ifc_file.schema)
 
-#4 Print the Project Name
+#4 
 project = ifc_file.by_type("IfcProject")[0] 
 project_name = project.Name or "Unnamed Project"
 print(f"Project: {project_name}")
@@ -22,19 +22,14 @@ for slab in slabs:
 	print(slab.GlobalId, slab.Name)   
 
 #7
-#Modify wall names
-#stored all IFCWall in the walls variable
 slabs = ifc_file.by_type("IfcSlab")
 for i, slab in enumerate(slabs, 1):
-	#renames the wall
     slab.Name = f"Renamed_Slab_{i}"
     print(f"Updated slab: {slab.GlobalId} → {slab.Name}")
 
 #8
 for site in project.IsDecomposedBy[0].RelatedObjects:
-	#Inside if each site, we will access ALL and each building
 	for building in site.IsDecomposedBy[0].RelatedObjects:
-		#Inside of each building, we will access ALL and each building story
 		for storey in building.IsDecomposedBy[0].RelatedObjects:
 			print("Storey", storey.Name, "Elevation", storey.Elevation)
 
